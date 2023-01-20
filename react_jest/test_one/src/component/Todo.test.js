@@ -1,4 +1,5 @@
 import {render, screen, cleanup} from '@testing-library/react';
+import renderer from 'react-test-renderer';
 import Todo from './Todo';
 
 afterEach(() => {
@@ -30,4 +31,21 @@ test('should render completed todo', () => {
   expect(todoElement).toBeInTheDocument();
   expect(todoElement).toHaveTextContent('do laundry');
   expect(todoElement).toContainHTML('strike');
+})
+
+
+test('matches snapshot', () => {
+
+  const item = {id: 1, title: 'wash dishes', completed: true};
+
+  const tree = renderer.create(<Todo item={item}/>).toJSON();
+  // when console.log(tree):
+  // tree = 
+  // {
+  //   type: 'div',
+  //   props: { 'data-testid': 'todo-1' },
+  //   children: [ { type: 'strike', props: {}, children: [Array] } ]
+  // }
+
+  expect(tree).toMatchSnapshot();
 })

@@ -2,10 +2,12 @@ import {render, screen, cleanup} from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import Todo from './Todo';
 
+//Clean up after each test
 afterEach(() => {
   cleanup();
 });
 
+//.. Unit Tests
 test('toBeTrue', () => {
   expect(true).toBe(true);
 })
@@ -34,6 +36,8 @@ test('should render completed todo', () => {
 })
 
 
+
+//.. Snapshot Test
 test('matches snapshot', () => {
 
   const item = {id: 1, title: 'wash dishes', completed: true};

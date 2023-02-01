@@ -12,7 +12,7 @@ class BankAccount:
         return self
 
     def withdraw(self, amount):
-        if self.balance >= amount:
+        if BankAccount.amount_valid(self.balance, amount):
             self.balance -= amount
         else:
             print ("Insufficient funds: Charging a $5 fee")
@@ -24,7 +24,7 @@ class BankAccount:
         return self
 
     def yield_interest(self):
-        if self.balance > 0:
+        if BankAccount.amount_valid(self.balance, 0):
             self.balance *= self.int_rate
         return self
 
@@ -34,6 +34,9 @@ class BankAccount:
             account.display_account_info()
         return cls
 
-    @classmethod
-    def clear_all_accounts(cls):
-        cls.all_accounts = []
+    @staticmethod
+    def amount_valid(amount, minimum):
+        if amount >= minimum:
+            return True
+        else:
+            return False

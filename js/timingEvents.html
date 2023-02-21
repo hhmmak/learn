@@ -9,14 +9,26 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- initial status -->
-  <div id="text-once"></div>
 
+  <button onclick="stopSetTimeout()">Clear setTimout Time Event</button>
+
+
+  <!--setTimeout, initial status -->
+  <div id="setTimeout-one"></div>
+  <div id="setTimeout-two"></div>
+  
   <script>
 
-  const changeDivText = setTimeout(() => {
-    document.getElementById("text-once").innerText = "Delayed for 3s"
+  // will only execute once, return id of timing event
+  const idSetTimeoutOne = setTimeout(() => {
+    document.getElementById("setTimeout-one").innerText = "1 - Delayed for 3s"
   } , 3000)
+  const idSetTimeoutTwo = setTimeout(() => {
+    document.getElementById("setTimeout-two").innerText = "2 - Delayed for 3s"
+  } , 3000)
+  // clear specified 
+  const stopSetTimeout = () => clearTimeout(idSetTimeoutTwo);
+
   </script>
 </body>
 </html>

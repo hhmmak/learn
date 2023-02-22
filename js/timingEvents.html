@@ -11,11 +11,15 @@
 <body>
 
   <button onclick="stopSetTimeout()">Clear setTimout Time Event</button>
+  <button onclick="stopSetInterval()">Clear setInterval Time Event</button>
 
 
   <!--setTimeout, initial status -->
   <div id="setTimeout-one"></div>
   <div id="setTimeout-two"></div>
+
+  <div id="setInterval-one"></div>
+  <div id="setInterval-two"></div>
   
   <script>
 
@@ -26,8 +30,21 @@
   const idSetTimeoutTwo = setTimeout(() => {
     document.getElementById("setTimeout-two").innerText = "2 - Delayed for 3s"
   } , 3000)
-  // clear specified 
+  // clear specified setTimeout event
   const stopSetTimeout = () => clearTimeout(idSetTimeoutTwo);
+
+  // will execute at specified intervals
+  const idSetIntervalOne = setInterval(() => {
+    let ele = document.getElementById("setInterval-one")
+    ele.innerHTML = Number(ele.innerHTML) + 1;
+  } , 1000)
+
+  const idSetIntervalTwo = setInterval(() => {
+    let ele = document.getElementById("setInterval-two")
+    ele.innerHTML = Number(ele.innerHTML) + 1;
+  } , 1000)
+
+  const stopSetInterval = () => clearInterval(idSetIntervalTwo);
 
   </script>
 </body>

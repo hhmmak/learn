@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Faker Data",
+  "description": "Faker Data",
+  "version": "1.0",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "APP.png"
+  }
+}

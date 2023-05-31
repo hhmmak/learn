@@ -20,7 +20,7 @@ class User {
   
   city: string = "";
   readonly adult: boolean = this.age >= 19;
-  private _friendsCount: number = 0;
+  protected _friendsCount: number = 0;
   // define type and public/private for properties same time as parameter, shorthand
   constructor(
     public email: string, 
@@ -46,6 +46,14 @@ class User {
       throw new Error("Cannot have less than 0 friends")
     }
     this._friendsCount += changeNum;
+  }
+}
+
+// cannot access private instances/methods of User, can access public/protected instances/methods of User
+class SubUser extends User {
+  isFamily: boolean = true;
+  addFriendCount(){
+    this._friendsCount += 1;
   }
 }
 

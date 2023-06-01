@@ -1,4 +1,4 @@
-interface Animal {
+interface Pet {
   species: string
   sex: 'male' | 'female' | 'hermaphrodite'
   age: number
@@ -9,13 +9,13 @@ interface Owner {
   address: string
 }
 
-interface AnimalInteraction {
+interface PetInteraction {
   feed(): void
   play(): void
 }
 
 // class implementing an interface must at least include all properties in exactly same properties
-class WildAnimal implements Animal {
+class StorePet implements Pet {
   constructor(
     public species: string,
     public sex: 'male' | 'female' | 'hermaphrodite',
@@ -24,7 +24,7 @@ class WildAnimal implements Animal {
   ){}
 }
 
-class Pet implements Animal, Owner, AnimalInteraction {
+class HomePet implements Pet, Owner, PetInteraction {
   constructor(
     public species: string,
     public sex: 'male' | 'female' | 'hermaphrodite',

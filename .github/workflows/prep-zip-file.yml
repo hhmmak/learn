@@ -1,0 +1,35 @@
+name: Prepare file for zip
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+
+jobs:
+  gather-files:
+    name: Gather files for compression
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Build .zip file
+              # only include all .json, images, .css, .html, .js files
+        run:  zip -r test_zip_tabs_manager tabs_manager -i "*.json" "*.png" "*.css" "*.html" "*.js"
+      
+      - name: Upload .zip (artifact)
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-archive-tabs-manager   # variable name for future workflow
+          path: test_zip_tabs_manager.zip   # path to .zip
+      
+      - name: Dowload .zip (artifact)
+        uses: actions/download-artifact@v3
+        with:
+          name: test-archive-tabs-manager
+          path: ~/Downloads
+      
+      - name: Display structure of downloaded files (locally)
+        run: ls -R
+        working-directory: ~/Downloads

@@ -16,7 +16,9 @@ jobs:
 
       - name: Build .zip file
               # only include all .json, images, .css, .html, .js files
-        run:  zip -r test_zip_tabs_manager chrome_extension/tabs_manager -i "*.json" "*.png" "*.css" "*.html" "*.js"
+        run:  |-
+          cd chrome_extension
+          zip -r test_zip_tabs_manager tabs_manager -i "*.json" "*.png" "*.css" "*.html" "*.js"
       
       - name: Upload .zip (artifact)
         uses: actions/upload-artifact@v3

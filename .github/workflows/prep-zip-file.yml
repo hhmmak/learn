@@ -28,8 +28,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: test-archive-tabs-manager
-          path: ~/chrome_extension
+          # path: ~/chrome_extension
       
       - name: Display structure of downloaded files (locally)
         run: ls -R
-        working-directory: ~/chrome_extension
+        # working-directory: ~/chrome_extension

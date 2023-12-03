@@ -23,13 +23,3 @@ jobs:
         with:
           name: test-archive-tabs-manager   # variable name for future workflow
           path: test_zip_tabs_manager.zip   # path to .zip
-      
-      - name: Download .zip (artifact)
-        uses: actions/download-artifact@v3
-        with:
-          name: test-archive-tabs-manager
-          # path: ~/chrome_extension
-      
-      - name: Display structure of downloaded files (locally)
-        run: ls -R
-        # working-directory: ~/chrome_extension

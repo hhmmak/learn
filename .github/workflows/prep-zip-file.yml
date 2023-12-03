@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-archive-tabs-manager   # variable name for future workflow
-          path: test_zip_tabs_manager.zip   # path to .zip
+          path: chrome_extension/test_zip_tabs_manager.zip   # path to .zip

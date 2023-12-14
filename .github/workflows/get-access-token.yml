@@ -21,7 +21,7 @@ jobs:
       - name: request access token
         run: |-
           curl "https://accounts.google.com/o/oauth2/token" -d \
-            "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&code=$CODE&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"
+            "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&code=$4/1AfJohXna7V2JZJY0mK3xGlwpqgH2NiTIc1SA7GZIJR5LB7U9V3ol8K9j_uw&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"
 
       # - name: save access token
       #   run: |-

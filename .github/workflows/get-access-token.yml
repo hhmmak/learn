@@ -26,6 +26,4 @@ jobs:
       - name: save access token
         run: |-
           RESPONSE=$(curl "https://accounts.google.com/o/oauth2/token" -d \
-            "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&code=4/1AfJohXlmJpB03w8Ik42pIRbVz-dlbMm8I3I22HkBSjilW2gsxrmJKdWw8jA&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob")
-          echo "responese $RESPONSE"
-          TOKEN=$($RESPONSE | jq -r '.error_description')
+            "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&code=4/1AfJohXlmJpB03w8Ik42pIRbVz-dlbMm8I3I22HkBSjilW2gsxrmJKdWw8jA&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"| jq -r '.error_description')

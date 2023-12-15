@@ -3,7 +3,7 @@ name: CD workflow
 on:
   push:
     branches:
-      - main
+      - learn
 
 jobs:
   upload-extension:

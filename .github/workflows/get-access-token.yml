@@ -25,10 +25,10 @@ jobs:
 
       - name: save access token
         run: |-
-          TOKEN=$(curl "https://accounts.google.com/o/oauth2/token" -d \
+          ERROR=$(curl "https://accounts.google.com/o/oauth2/token" -d \
             "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&code=$CODE&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"| jq -r '.error')
-          printf '%s\n' "$TOKEN"
-          echo "TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          printf '%s\n' "$ERROR"
+          echo "TOKEN=$ERROR" >> "$GITHUB_ENV"
 
       - name: display $TOKEN
         run: |-

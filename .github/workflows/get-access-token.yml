@@ -3,7 +3,7 @@ name: CD workflow
 on:
   push:
     branches:
-      - learn
+      - main
 
 jobs:
   upload-extension:
@@ -13,7 +13,7 @@ jobs:
     env:
       CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
-      CODE: 4/1AfJohXlmJpB03w8Ik42pIRbVz-dlbMm8I3I22HkBSjilW2gsxrmJKdWw8jA
+      CODE: 4/1AfJohXmaLrn3275ary6BhODqrkKrKjVASs_ljcfx6LRw9r_iU3mfTtEZir4
     steps:
       - name: install dependencies
         run: sudo apt-get -y install curl jq
@@ -25,16 +25,6 @@ jobs:
 
       - name: save access token
         run: |-
-          RESPONSE=$(curl "https://accounts.google.com/o/oauth2/token" -d \
-            "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&code=4/1AfJohXlmJpB03w8Ik42pIRbVz-dlbMm8I3I22HkBSjilW2gsxrmJKdWw8jA&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"| jq -r '.error_description')
-          echo $RESPONSE
-
-      - name: upload updated package
-        run: |-
-          curl \
-            -H "Authorization: Bearer $TOKEN"  \
-            -H "x-goog-api-version: 2" \
-            -X PUT \
-            -T $FILE_NAME \
-            -v \
-            https://www.googleapis.com/upload/chromewebstore/v1.1/items/$ITEM_ID
+          TOKEN=$(curl "https://accounts.google.com/o/oauth2/token" -d \
+            "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&code=$CODE&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"| jq -r '.refresh_token')
+          echo $TOKEN

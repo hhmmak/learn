@@ -35,4 +35,6 @@ jobs:
         run: ls -R chrome_extension/test_zip_tabs_manager.zip
       
       - name: download-artifact output download-path
-        run: echo ${{ steps.get_archive.outputs.download-path }}
+        env:
+          output: ${{ steps.get_archive.outputs }}
+        run: echo $output

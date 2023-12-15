@@ -36,5 +36,5 @@ jobs:
       
       - name: download-artifact output download-path
         env:
-          output: ${{ steps.get_archive.outputs }}
+          output: ${{ steps.get_archive.outputs.download-path }}
         run: echo $output

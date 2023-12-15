@@ -3,7 +3,7 @@ name: Prepare file for zip
 on:
   push:
     branches:
-      - learn
+      - main
 
 jobs:
   gather-files:
@@ -24,3 +24,8 @@ jobs:
         with:
           name: test-archive-tabs-manager   # variable name for future workflow
           path: chrome_extension/test_zip_tabs_manager.zip   # path to .zip
+
+      - name: Download .zip
+        uses: actions/download-artifact@v4
+        with:
+          name: test-archive-tabs-manager

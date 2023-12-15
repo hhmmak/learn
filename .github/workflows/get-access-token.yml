@@ -32,4 +32,4 @@ jobs:
 
       - name: display $TOKEN
         run: |-
-          echo "$TOKEN
+          echo "$TOKEN"

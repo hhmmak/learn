@@ -20,6 +20,7 @@ jobs:
           zip -r test_zip_tabs_manager tabs_manager -i "*.json" "*.png" "*.css" "*.html" "*.js"
       
       - name: Upload .zip (artifact)
+        id: get_archive
         uses: actions/upload-artifact@v3
         with:
           name: test-archive-tabs-manager   # variable name for future workflow
@@ -32,3 +33,6 @@ jobs:
       
       - name: Display structure
         run: ls -R chrome_extension/test_zip_tabs_manager.zip
+      
+      - name: download-artifact output download-path
+        run: echo ${{ steps.get_archive.outputs.download-path }}

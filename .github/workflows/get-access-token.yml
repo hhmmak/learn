@@ -26,5 +26,9 @@ jobs:
       - name: save access token
         run: |-
           TOKEN=$(curl "https://accounts.google.com/o/oauth2/token" -d \
-            "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&code=$CODE&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"| jq -r '.refresh_token')
+            "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&code=$CODE&grant_type=authorization_code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"| jq -r '.error')
+          echo $TOKEN
+
+      - name: display $TOKEN
+        run: |-
           echo $TOKEN

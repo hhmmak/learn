@@ -31,4 +31,4 @@ jobs:
           name: test-archive-tabs-manager
       
       - name: Display structure
-        run: ls -R
+        run: ls -R chrome_extension/test_zip_tabs_manager.zip

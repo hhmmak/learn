@@ -29,3 +29,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: test-archive-tabs-manager
+      
+      - name: Display structure
+        run: ls -R

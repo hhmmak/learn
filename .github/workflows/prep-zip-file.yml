@@ -3,7 +3,7 @@ name: Prepare file for zip
 on:
   push:
     branches:
-      - main
+      - learn
 
 jobs:
   gather-files:

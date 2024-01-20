@@ -21,4 +21,4 @@ jobs:
         id: changed-files-list
         run: echo "changed_files=$(git diff --name-only -r HEAD^1 HEAD | xargs)" >> $GITHUB_OUTPUT
       - name: Display result
-        run: echo ${{ steps.changed-files-list.output.changed_files }}
+        run: echo ${{ steps.changed-files-list.outputs }}

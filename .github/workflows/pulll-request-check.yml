@@ -13,11 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/github-script@v7
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
-          script: |
-            let error = true
-            for (let commit of ${{ github.event.commits }}){
-              console.log(commit.message)
-              console.log(added)
-            }
+          fetch-depth: 2
+      - name: Get previous commits
+        run: git diff --name-only -r HEAD^1 HEAD

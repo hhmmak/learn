@@ -5,8 +5,8 @@ on:
     types:
       - opened
       - edited
-      - labeled
-      - unlabeled
+      - synchronize
+      
 
 jobs:
   Check-Version-Number:

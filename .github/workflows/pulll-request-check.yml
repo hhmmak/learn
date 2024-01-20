@@ -19,6 +19,6 @@ jobs:
           fetch-depth: 2
       - name: Get list of file changed
         id: changed-file-list
-        run: git diff --name-only -r HEAD^1 HEAD >> $GITHUB_OUTPUT
+        run: git diff --name-only -r HEAD^1 HEAD >> "$GITHUB_OUTPUT"
       - name: Display result
         run: echo "${{ steps.changed-file-list.outputs.result }}"

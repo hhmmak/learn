@@ -19,4 +19,5 @@ jobs:
             let error = true
             for (let commit of ${{ github.event.commits }}){
               console.log(commit.message)
+              console.log(added)
             }

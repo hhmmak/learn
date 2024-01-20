@@ -1,0 +1,22 @@
+name: Github PR Check
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - labeled
+      - unlabeled
+
+jobs:
+  Check-Version-Number:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/github-script@7
+        with:
+          script: |
+            let error = true
+            for (let commit of ${{ github.event.commits }}){
+              console.log(commit.message)
+            }

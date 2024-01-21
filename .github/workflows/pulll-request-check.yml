@@ -19,9 +19,12 @@ jobs:
           fetch-depth: 2
       - name: Get list of files changed
         id: changed-files-list
-        run: echo "changed_files=$(git diff --name-only -r HEAD^1 HEAD | xargs)" >> $GITHUB_OUTPUT
+        run: |-
+          $changed_files = $(git diff --name-only -r HEAD^1 HEAD | xargs)
+          echo "files=$changed_files" >> $GITHUB_OUTPUT
+        
       - name: Display result
         run: |
-          for file in ${{ steps.changed-files.outputs.changed_files }}; do
+          for file in ${{ steps.changed-files-list.outputs.files }}; do
               echo "$file was changed"
           done

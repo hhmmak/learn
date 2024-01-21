@@ -20,8 +20,7 @@ jobs:
       - name: Get list of files changed
         id: changed-files-list
         run: |-
-          $changed_files=$(git diff --name-only -r HEAD^1 HEAD | xargs)
-          echo "files=$changed_files" >> $GITHUB_OUTPUT
+          echo "files=$(git diff --name-only -r HEAD^1 HEAD | xargs)" >> $GITHUB_OUTPUT
         
       - name: Display result
         run: |

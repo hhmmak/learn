@@ -33,7 +33,7 @@ jobs:
       - name: Change string into array
         id: changed-files-array
         run: |
-          IFS=' ' read -ra files_array <<< "$files"
+          IFS=' ' read -ra files_array <<< ${{ steps.changed-files-list.outputs.files }}
           echo "files_array=(${files_array[@]})" >> $GITHUB_OUTPUT
       
       - name: Display array result

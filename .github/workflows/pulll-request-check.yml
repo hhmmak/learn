@@ -27,3 +27,11 @@ jobs:
           for file in ${{ steps.changed-files-list.outputs.files }}; do
               echo "$file was changed"
           done
+      
+      - name: Check if pulll-request-check.yml is changed
+        uses: actions/github-script@v7
+        with:
+          script: |
+            if (!(${{ steps.changed-files-list.outputs.files}}.contains('.github/workflows/pulll-request-check.yml'))) {
+              throw new Error(`CI is not updated`);
+            }

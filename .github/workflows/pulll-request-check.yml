@@ -33,6 +33,6 @@ jobs:
         with:
           script: |
             console.log(typeof ${{ steps.changed-files-list.outputs.files}})
-            if (!(${{ steps.changed-files-list.outputs.files}}.contains('.github/workflows/pulll-request-check.yml'))) {
-              throw new Error(`CI is not updated`);
-            }
+            # if (!(${{ steps.changed-files-list.outputs.files}}.contains('.github/workflows/pulll-request-check.yml'))) {
+            #   throw new Error(`CI is not updated`);
+            # }

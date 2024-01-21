@@ -36,6 +36,10 @@ jobs:
           IFS=' ' read -ra files_array <<< "$files"
           echo "files_array=(${files_array[@]})" >> $GITHUB_OUTPUT
       
+      - name: Display array result
+        run: |
+          echo ${{ steps.changed-files-array.outputs.files_array }}
+
       - name: Check if pulll-request-check.yml is changed
         uses: actions/github-script@v7
         with:

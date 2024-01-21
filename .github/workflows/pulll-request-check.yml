@@ -22,8 +22,6 @@ jobs:
         run: |-
           files_string=$(git diff --name-only -r HEAD^1 HEAD | xargs)
           echo "files=$files_string" >> $GITHUB_OUTPUT
-          IFS=' ' read -ra files_array <<< $files_string
-          echo "files_array=(${files_array[@]})" >> $GITHUB_OUTPUT
 
         
       - name: Display result
@@ -36,5 +34,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            console.log(`${{steps.changed-files-list.outputs.files_array}}`);
-            console.log(`${{steps.changed-files-list.outputs.files}}`);
+            let stringArr = (`${{steps.changed-files-list.outputs.files}}`).split(" ");
+            if (stringArr.includes('.github/workflows/get-access-token.yml'))){
+              throw new Error ("CI is not updated")
+            }

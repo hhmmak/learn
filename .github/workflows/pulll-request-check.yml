@@ -20,7 +20,9 @@ jobs:
       - name: Get list of files changed
         id: changed-files-list
         run: |-
-          echo "files=$(git diff --name-only -r HEAD^1 HEAD | xargs)" >> $GITHUB_OUTPUT
+          files_string=$(git diff --name-only -r HEAD^1 HEAD | xargs)
+          echo "files=$files_string" >> $GITHUB_OUTPUT
+
         
       - name: Display result
         run: |
@@ -28,9 +30,14 @@ jobs:
               echo "$file was changed"
           done
       
+      - name: Change string into array
+        id: changed-files-array
+        run: |
+          IFS=' ' read - ra files_array <<< "$files"
+          echo "files_array=(${files_array[@]})" >> $GITHUB_OUTPUT
+      
       - name: Check if pulll-request-check.yml is changed
         uses: actions/github-script@v7
         with:
           script: |
-            console.log(typeof ${{ steps.changed-files-list.outputs.files}});
-            
+            console.log(typeof ${{ steps.changed-files-array.outputs.files_array}});

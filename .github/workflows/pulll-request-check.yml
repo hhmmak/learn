@@ -34,7 +34,9 @@ jobs:
       
       - name: Display array result
         run: |
-          echo ${{ steps.changed-files-list.outputs.files_array }}
+          for file in ${{ steps.changed-files-list.outputs.files_array }}; do
+            echo "$file was changed"
+          done
 
       - name: Check if pulll-request-check.yml is changed
         uses: actions/github-script@v7

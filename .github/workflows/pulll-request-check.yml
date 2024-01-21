@@ -35,6 +35,6 @@ jobs:
         with:
           script: |
             let stringArr = (`${{steps.changed-files-list.outputs.files}}`).split(" ");
-            if (stringArr.includes('.github/workflows/get-access-token.yml'))){
-              throw new Error ("CI is not updated")
+            if (stringArr.includes('.github/workflows/get-access-token.yml')){
+              throw new Error ("CI is not updated");
             }

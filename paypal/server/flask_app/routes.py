@@ -50,6 +50,47 @@ def create_order():
         "purchase_units": [cart],
     }
 
+    # data = { 
+    #     "intent": "CAPTURE",    # capture payment immediately
+    #     "purchase_units": [ 
+    #         { 
+    #             "reference_id": "d9f80740-38f0-11e8-b467-0ed5f89f718b",     # guild-set reference id
+    #             "amount": {     # payment detail
+    #                 "currency_code": "USD", 
+    #                 "value": "100.00" 
+    #             },
+    #             "payee": {
+    #                 "email": "merchant@email.com",  # event organizer email address
+    #                 "merchant_id": "5nz3d5f628a74"  # event organizer encrypted paypal account id
+    #             }
+    #         } 
+    #     ],
+    #     "payment_instruction": {
+    #         "platform_fees": [
+    #             {
+    #                 "currency_code": "USD", 
+    #                 "value": "10.00"
+    #             }
+    #         ],
+    #         "disbursement_mode": "DELAYED"
+    #     },
+    #     "payment_source": { 
+    #         "paypal": { 
+    #             "experience_context": { 
+    #                 "payment_method_preference": "IMMEDIATE_PAYMENT_REQUIRED", 
+    #                 "brand_name": "EXAMPLE INC", 
+    #                 "locale": "en-US", 
+    #                 "landing_page": "LOGIN", 
+    #                 "shipping_preference": "SET_PROVIDED_ADDRESS",
+    #                 "user_action": "PAY_NOW",
+    #                 "return_url": "https://example.com/returnUrl",
+    #                 "cancel_url": "https://example.com/cancelUrl" 
+    #             } 
+                
+    #         } 
+    #     }
+    # }
+
     headers = {
         'Content-Type': 'application/json',
         'PayPal-Request-Id': 'abc1',

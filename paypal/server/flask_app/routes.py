@@ -1,4 +1,5 @@
 from app import app
+from flask import request
 import os, requests, json
 
 # Home route
@@ -31,7 +32,7 @@ def get_access_token():
 
     return response.json()
 
-@app.route('/create-order')
+@app.route('/api/orders', methods=['POST'])
 def create_order():
 
     cart = {
@@ -62,8 +63,32 @@ def create_order():
 
     response = requests.post(url, headers=headers, data=json.dumps(payload))
 
-    return response.json()
+    return response.json(), response.status_code
 
+@app.route('/api/orders/<order_id>', methods=['GET','POST'])
+def order_details(order_id):
+
+    token = get_access_token()['access_token']
+
+    url = f'{os.environ.get("PAYPAL_BASE")}/v2/checkout/orders/{order_id}'
+
+    print(url)
+
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {token}',
+        # Uncomment one of these to force an error for negative testing (in sandbox mode only). Documentation:
+        # https://developer.paypal.com/tools/sandbox/negative-testing/request-headers/
+        # "PayPal-Mock-Response": '{"mock_application_codes": "MISSING_REQUIRED_PARAMETER"}'
+        # "PayPal-Mock-Response": '{"mock_application_codes": "PERMISSION_DENIED"}'
+        # "PayPal-Mock-Response": '{"mock_application_codes": "INTERNAL_SERVER_ERROR"}'
+    }
+
+    response = requests.get(url, headers=headers)
+
+    return response.json(), response.status_code
+
+@app.route('/api/orders/<order_id>/capture', methods=['POST'])
 def capture_order(order_id):
 
     token = get_access_token()['access_token']
@@ -82,4 +107,7 @@ def capture_order(order_id):
 
     response = requests.post(url, headers=headers)
 
-    return response.json()
+    return response.json(), response.status_code
+
+# @staticmethod
+# def parse_response(request_Body):

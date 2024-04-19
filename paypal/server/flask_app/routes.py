@@ -36,12 +36,26 @@ def get_access_token():
 def create_order():
 
     cart = {
-                "reference_id": "cba1",
-                "amount": {
-                    "currency_code": "USD",
-                    "value": "100.00"
+        "amount": {
+            "currency_code": "USD",
+            "value": "100.00"
+        },
+        "payee": {
+            "email": "sb-nyblt29881484@business.example.com",
+            "merchant_id": "EM2QT8H7XV3BU"
+        },
+        "payment_instruction": {
+            "platform_fees": [
+                {
+                    "amount": {
+                        "value": "10.00",
+                        "currency_code": "USD"
+                    }
                 }
-            }
+            ],
+        },
+        "disbursement_mode": "DELAYED",
+    }
     token = get_access_token()['access_token']
 
     url = f'{os.environ.get("PAYPAL_BASE")}/v2/checkout/orders'
@@ -51,29 +65,32 @@ def create_order():
     }
 
     # data = { 
-    #     "intent": "CAPTURE",    # capture payment immediately
-    #     "purchase_units": [ 
+    #     "intent": "CAPTURE",    # !required; capture payment immediately
+    #     "purchase_units": [   # !required;
     #         { 
-    #             "reference_id": "d9f80740-38f0-11e8-b467-0ed5f89f718b",     # guild-set reference id
-    #             "amount": {     # payment detail
-    #                 "currency_code": "USD", 
-    #                 "value": "100.00" 
+    #             "reference_id": "d9f80740-38f0-11e8-b467-0ed5f89f718b",     # unique ID for purchase unit, for self-use, required if have multiple purchase units, `default` as default
+    #             "description": "registration fee for ABC event",     # description
+    #             "invoice_id": "abc-1" # unique ID of invoice from self business, for self-use
+    #             "soft_descriptor": "EVENT REG" # description on payer statement, for payer, max 22 char
+    #             "amount": {     # !required; payment detail
+    #                 "currency_code": "USD",   # !required
+    #                 "value": "100.00"     # !required
     #             },
     #             "payee": {
     #                 "email": "merchant@email.com",  # event organizer email address
     #                 "merchant_id": "5nz3d5f628a74"  # event organizer encrypted paypal account id
-    #             }
-    #         } 
+    #             },
+    #            "payment_instruction": {
+    #                 "platform_fees": [
+    #                    {
+    #                       "currency_code": "USD", 
+    #                       "value": "10.00"
+    #                    }
+    #                ],
+    #            "disbursement_mode": "DELAYED"
+    #           },
+    #        } 
     #     ],
-    #     "payment_instruction": {
-    #         "platform_fees": [
-    #             {
-    #                 "currency_code": "USD", 
-    #                 "value": "10.00"
-    #             }
-    #         ],
-    #         "disbursement_mode": "DELAYED"
-    #     },
     #     "payment_source": { 
     #         "paypal": { 
     #             "experience_context": { 
@@ -92,10 +109,10 @@ def create_order():
     # }
 
     headers = {
-        'Content-Type': 'application/json',
-        'PayPal-Request-Id': 'abc1',
-        'Authorization': f'Bearer {token}',
-        # Uncomment one of these to force an error for negative testing (in sandbox mode only). Documentation:
+        'PayPal-Request-Id': 'abc1',    # unique id for order between Paypal Account Manager and self
+        'Authorization': f'Bearer {token}', # !required
+        'Content-Type': 'application/json', # !required
+    # Uncomment one of these to force an error for negative testing (in sandbox mode only). Documentation:
         # https://developer.paypal.com/tools/sandbox/negative-testing/request-headers/
         # "PayPal-Mock-Response": '{"mock_application_codes": "MISSING_REQUIRED_PARAMETER"}'
         # "PayPal-Mock-Response": '{"mock_application_codes": "PERMISSION_DENIED"}'

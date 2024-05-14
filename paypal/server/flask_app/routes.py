@@ -32,6 +32,22 @@ def get_access_token():
 
     return response.json()
 
+@app.route('/client-token')
+def get_client_token():
+
+    access_token = get_access_token()
+
+    url = f'{os.environ.get("PAYPAL_BASE")}/v1/identity/generate-token'
+    
+    headers = {
+        "Authorization": f'Bearer {access_token}',
+        "Content-Type": "application/json",
+    }
+
+    response = requests.post(url, headers=headers)
+
+    return response.json()['client_token'], response.status_code
+
 @app.route('/api/orders', methods=['POST'])
 def create_order():
 

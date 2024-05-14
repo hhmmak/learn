@@ -38,23 +38,23 @@ def create_order():
     cart = {
         "amount": {
             "currency_code": "USD",
-            "value": "100.00"
+            "value": "10.00"
         },
-        "payee": {
-            "email": "sb-nyblt29881484@business.example.com",
-            "merchant_id": "EM2QT8H7XV3BU"
-        },
-        "payment_instruction": {
-            "platform_fees": [
-                {
-                    "amount": {
-                        "value": "10.00",
-                        "currency_code": "USD"
-                    }
-                }
-            ],
-        },
-        "disbursement_mode": "DELAYED",
+        # "payee": {
+        #     "email": "sb-nyblt29881484@business.example.com",
+        #     "merchant_id": "EM2QT8H7XV3BU"
+        # },
+        # "payment_instruction": {
+        #     "platform_fees": [
+        #         {
+        #             "amount": {
+        #                 "value": "10.00",
+        #                 "currency_code": "USD"
+        #             }
+        #         }
+        #     ],
+        # },
+        # "disbursement_mode": "DELAYED",
     }
     token = get_access_token()['access_token']
 
@@ -169,3 +169,5 @@ def capture_order(order_id):
 
 # @staticmethod
 # def parse_response(request_Body):
+
+

@@ -1,6 +1,7 @@
 from app import app
 from flask import request
 import os, requests, json
+import base64
 
 # Home route
 @app.route('/')
@@ -47,6 +48,28 @@ def get_client_token():
     response = requests.post(url, headers=headers)
 
     return response.json()['client_token'], response.status_code
+
+@app.route('/auth-assertion-value')
+def get_auth_assertion_value():
+
+    client_id = os.environ.get('PAYPAL_CLIENT_ID')
+    seller_id = os.environ.get('PAYPAL_ACCT_ID')
+    seller_email = os.environ.get('PAYPAL_ACCT_EMAIL')
+
+    header = {
+        "alg": "none"
+    }
+
+    payload = {
+        "iss": client_id,
+        "payer_id": seller_id,
+        # "payer_id": seller_email,
+    }
+
+    encodedHeader = base64.b64encode(json.dumps(header).encode('utf-8'))
+    encodedPayload = base64.b64decode(json.dumps(payload).encode('utf-8'))
+
+    return f'{encodedHeader}.{encodedPayload}.'
 
 @app.route('/api/orders', methods=['POST'])
 def create_order():

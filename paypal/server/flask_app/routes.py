@@ -67,7 +67,7 @@ def get_auth_assertion_value():
     }
 
     encodedHeader = base64.b64encode(json.dumps(header).encode('utf-8'))
-    encodedPayload = base64.b64decode(json.dumps(payload).encode('utf-8'))
+    encodedPayload = base64.b64encode(json.dumps(payload).encode('utf-8'))
 
     return f'{encodedHeader}.{encodedPayload}.'
 

@@ -71,6 +71,33 @@ def get_auth_assertion_value():
 
     return f'{encodedHeader}.{encodedPayload}.'
 
+@app.route('/refund')
+def refund_payment():
+
+    aav = get_auth_assertion_value()
+    token = get_access_token()['access_token']
+    capture_id = None
+
+    url = f'{os.environ.get("PAYPAL_BASE")}/v2/payments/captures/${capture_id}/refund'
+
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {token}',
+        'PayPal-Request-Id': 'YOUR-PAYPAL-REQUEST-ID',    # unique id for order between Paypal Account Manager and self
+        'PayPal-Auth-Assertion': aav
+    }
+
+#  payload not required if it is full refund
+    payload = {
+        'amount': {
+            'value': '10.00',
+            'currency_code': 'USD'
+        }
+    }
+
+    response = requests.post(url, headers=headers, data=json.dumps(payload))
+
+
 @app.route('/api/orders', methods=['POST'])
 def create_order():
 

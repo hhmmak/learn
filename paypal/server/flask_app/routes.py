@@ -74,7 +74,7 @@ def get_auth_assertion_value():
 @app.route('/refund')
 def refund_payment():
 
-    aav = get_auth_assertion_value()
+    auth_asssertion = get_auth_assertion_value()
     token = get_access_token()['access_token']
     capture_id = None
 
@@ -84,7 +84,7 @@ def refund_payment():
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {token}',
         'PayPal-Request-Id': 'YOUR-PAYPAL-REQUEST-ID',    # unique id for order between Paypal Account Manager and self
-        'PayPal-Auth-Assertion': aav
+        'PayPal-Auth-Assertion': auth_asssertion
     }
 
 #  payload not required if it is full refund

@@ -83,7 +83,7 @@ def refund_payment():
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {token}',
-        'PayPal-Request-Id': 'YOUR-PAYPAL-REQUEST-ID',    # unique id for order between Paypal Account Manager and self
+        'PayPal-Request-Id': 'YOUR-PAYPAL-REQUEST-ID',    # user-generated id; unique id for order between Paypal Account Manager and self
         'PayPal-Auth-Assertion': auth_asssertion
     }
 
@@ -175,7 +175,7 @@ def create_order():
     # }
 
     headers = {
-        'PayPal-Request-Id': 'abc1',    # unique id for order between Paypal Account Manager and self
+        'PayPal-Request-Id': 'abc1',    # user-generated id; unique id for order between Paypal Account Manager and self
         'Authorization': f'Bearer {token}', # !required
         'Content-Type': 'application/json', # !required
     # Uncomment one of these to force an error for negative testing (in sandbox mode only). Documentation:

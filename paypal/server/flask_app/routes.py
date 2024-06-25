@@ -231,6 +231,73 @@ def capture_order(order_id):
 
     response = requests.post(url, headers=headers)
 
+    """ 
+    Example for response.json() from PayPal on success capture order 
+
+        { 
+            'id': '9FV27953KK686364C', # order ID
+            'status': 'COMPLETED', 
+            'payment_source': {
+                'paypal': {
+                    'email_address': 'email@personal.example.com', 
+                    'account_id': '4PTH5SLX8SB3J', 
+                    'account_status': 'VERIFIED', 
+                    'name': {'given_name': 'John', 'surname': 'Doe'}, 
+                    'address': {'country_code': 'US'}
+                }
+            }, 
+            'purchase_units': [
+                {
+                    'reference_id': 'default', 
+                    'shipping': {
+                        'name': {'full_name': 'John Doe'}, 
+                        'address': {'address_line_1': '1 Main St', 'admin_area_2': 'San Jose', 'admin_area_1': 'CA', 'postal_code': '95131', 'country_code': 'US'}
+                    }, 
+                    'payments': {
+                        'captures': [
+                            {
+                                'id': '9HN63998U9002144F',
+                                'status': 'COMPLETED', 
+                                'amount': {'currency_code': 'USD', 'value': '10.00'}, 
+                                'final_capture': True, 
+                                'seller_protection': {'status': 'ELIGIBLE', 'dispute_categories': ['ITEM_NOT_RECEIVED', 'UNAUTHORIZED_TRANSACTION']}, 
+                                'seller_receivable_breakdown': {
+                                    'gross_amount': {'currency_code': 'USD', 'value': '10.00'}, 
+                                    'paypal_fee': {'currency_code': 'USD', 'value': '0.84'}, 
+                                    'net_amount': {'currency_code': 'USD', 'value': '9.16'}
+                                }, 
+                                'links': [
+                                    {
+                                        'href': 'https://api.sandbox.paypal.com/v2/payments/captures/9HN63998U9002144F', 
+                                        'rel': 'self', 'method': 'GET'
+                                    }, 
+                                    {
+                                        'href': 'https://api.sandbox.paypal.com/v2/payments/captures/9HN63998U9002144F/refund', 
+                                        'rel': 'refund', 'method': 'POST'
+                                    }, 
+                                    {
+                                        'href': 'https://api.sandbox.paypal.com/v2/checkout/orders/9FV27953KK686364C', 
+                                        'rel': 'up', 'method': 'GET'
+                                    }
+                                ], 
+                                'create_time': '2024-06-25T19:29:29Z', 
+                                'update_time': '2024-06-25T19:29:29Z'
+                            }
+                        ]
+                    }
+                }
+            ], 
+            'payer': {
+                'name': {'given_name': 'John', 'surname': 'Doe'}, 
+                'email_address': 'email@personal.example.com', 
+                'payer_id': '4PTH5SLX8SB3J', 
+                'address': {'country_code': 'US'}
+            }, 
+            'links': [{'href': 'https://api.sandbox.paypal.com/v2/checkout/orders/9FV27953KK686364C', 'rel': 'self', 'method': 'GET'}]
+        }
+
+    """
+
     return response.json(), response.status_code
 
 # @staticmethod

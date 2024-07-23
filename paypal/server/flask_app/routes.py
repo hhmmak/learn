@@ -78,24 +78,26 @@ def refund_payment():
     token = get_access_token()['access_token']
     capture_id = None
 
-    url = f'{os.environ.get("PAYPAL_BASE")}/v2/payments/captures/${capture_id}/refund'
+    url = f'{os.environ.get("PAYPAL_BASE")}/v2/payments/captures/{capture_id}/refund'
 
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {token}',
-        'PayPal-Request-Id': 'YOUR-PAYPAL-REQUEST-ID',    # user-generated id; unique id for order between Paypal Account Manager and self
-        'PayPal-Auth-Assertion': auth_asssertion
+        'PayPal-Request-Id': 't123',    # user-generated id; unique id for order between Paypal Account Manager and self
+        # 'PayPal-Auth-Assertion': auth_asssertion  # required with merchant implementation, according to docs
     }
 
 #  payload not required if it is full refund
-    payload = {
-        'amount': {
-            'value': '10.00',
-            'currency_code': 'USD'
-        }
-    }
+    # payload = {
+    #     'amount': {
+    #         'value': '10.00',
+    #         'currency_code': 'USD'
+    #     }
+    # }
 
-    response = requests.post(url, headers=headers, data=json.dumps(payload))
+    response = requests.post(url, headers=headers)
+    # response = requests.post(url, headers=headers, data=json.dumps(payload))
+    return response.json(), response.status_code
 
 
 @app.route('/api/orders', methods=['POST'])
